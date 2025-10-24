@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { RecommendationCard } from "@/components/RecommendationCard";
-import { Button } from "@/components/d/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/d/card";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AlertTriangle, RefreshCw } from "lucide-react";
 
 interface AIInsights {
