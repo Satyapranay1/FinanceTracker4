@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 220 17% 97%;
+    --foreground: 224 18% 16%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 224 18% 16%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 18% 16%;
+
+    --primary: 239 70% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 239 70% 70%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 224 18% 16%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 239 70% 96%;
+    --accent-foreground: 239 70% 55%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    --success-light: 142 76% 96%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --warning-light: 38 92% 96%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 239 70% 55%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 224 18% 16%;
+    --sidebar-primary: 239 70% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 239 70% 96%;
+    --sidebar-accent-foreground: 239 70% 55%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 239 70% 55%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(239 70% 55%), hsl(260 70% 65%));
+    --gradient-success: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 50%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(220 17% 98%));
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(220 13% 91% / 0.5);
+    --shadow-md: 0 4px 6px -1px hsl(220 13% 91% / 0.5), 0 2px 4px -1px hsl(220 13% 91% / 0.3);
+    --shadow-lg: 0 10px 15px -3px hsl(220 13% 91% / 0.5), 0 4px 6px -2px hsl(220 13% 91% / 0.3);
+    --shadow-glow: 0 0 20px hsl(239 70% 55% / 0.2);
+  }
+
+  .dark {
+    --background: 224 18% 12%;
+    --foreground: 220 17% 97%;
+
+    --card: 224 18% 16%;
+    --card-foreground: 220 17% 97%;
+
+    --popover: 224 18% 16%;
+    --popover-foreground: 220 17% 97%;
+
+    --primary: 239 70% 60%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 239 70% 75%;
+
+    --secondary: 224 18% 20%;
+    --secondary-foreground: 220 17% 97%;
+
+    --muted: 224 18% 20%;
+    --muted-foreground: 220 9% 65%;
+
+    --accent: 224 18% 24%;
+    --accent-foreground: 239 70% 60%;
+
+    --success: 142 76% 40%;
+    --success-foreground: 0 0% 100%;
+    --success-light: 142 76% 20%;
+
+    --warning: 38 92% 55%;
+    --warning-foreground: 0 0% 100%;
+    --warning-light: 38 92% 20%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 224 18% 24%;
+    --input: 224 18% 24%;
+    --ring: 239 70% 60%;
+
+    --sidebar-background: 224 18% 16%;
+    --sidebar-foreground: 220 17% 97%;
+    --sidebar-primary: 239 70% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 224 18% 24%;
+    --sidebar-accent-foreground: 239 70% 60%;
+    --sidebar-border: 224 18% 24%;
+    --sidebar-ring: 239 70% 60%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(239 70% 60%), hsl(260 70% 70%));
+    --gradient-success: linear-gradient(135deg, hsl(142 76% 40%), hsl(142 76% 55%));
+    --gradient-card: linear-gradient(145deg, hsl(224 18% 16%), hsl(224 18% 18%));
+    
+    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.3);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.3), 0 2px 4px -1px hsl(0 0% 0% / 0.2);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.3), 0 4px 6px -2px hsl(0 0% 0% / 0.2);
+    --shadow-glow: 0 0 20px hsl(239 70% 60% / 0.3);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  .card-gradient {
+    background: var(--gradient-card);
+  }
+  
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
