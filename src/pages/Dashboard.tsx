@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { SummaryCard } from "@/components/SummaryCard";
 import { Wallet, TrendingUp, TrendingDown, PiggyBank } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/d/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Navbar } from "@/components/Navbar";
 import { toast } from "sonner";
 
