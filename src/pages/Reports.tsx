@@ -2,8 +2,8 @@
 
 import { useEffect, useState, useRef } from "react";
 import { Navbar } from "@/components/Navbar";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/d/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/d/select";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import {
   PieChart,
   Pie,
@@ -19,7 +19,7 @@ import {
 } from "recharts";
 
 interface Transaction {
-  id: string; // consistent with other components
+  id: string;
   category: string;
   amount: number;
   date: string;
