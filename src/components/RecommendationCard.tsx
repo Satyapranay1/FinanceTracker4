@@ -1,12 +1,12 @@
 import { Sparkles, TrendingDown, Check } from "lucide-react";
-import { Button } from "./d/button";
-import { Card, CardContent } from "./d/card";
-import { Badge } from "./d/badge";
+import { Button } from "./ui/button";
+import { Card, CardContent } from "./ui/card";
+import { Badge } from "./ui/badge";
 
 interface RecommendationCardProps {
   category: string;
   suggestion: string;
-  hint?: string; // Added hint
+  hint?: string; 
   impact: 'Low' | 'Medium' | 'High';
   potentialSavings: number;
   percentOfIncome?: number;
