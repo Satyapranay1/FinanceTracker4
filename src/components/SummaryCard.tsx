@@ -1,5 +1,5 @@
 import { LucideIcon } from "lucide-react";
-import { Card, CardContent } from "./d/card";
+import { Card, CardContent } from "./ui/card";
 
 interface SummaryCardProps {
   title: string;
