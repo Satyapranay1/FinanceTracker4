@@ -140,8 +140,8 @@ export default function Recommendations() {
           <div>
             <h1 className="text-3xl font-bold mb-2">AI Recommendations</h1>
             <p className="text-gray-500 dark:text-gray-400">Personalized insights to optimize your spending</p>
-            <p className="mt-1 text-lg font-semibold">Estimated Savings Applied: ${estimatedSavings.toLocaleString()}</p>
-            <p className="mt-1 text-lg font-semibold">Total Potential Savings Available: ${recommendations.reduce((sum, rec) => sum + rec.potentialSavings, 0).toLocaleString()}</p>
+            <p className="mt-1 text-lg font-semibold">Estimated Savings Applied: ₹{estimatedSavings.toLocaleString()}</p>
+            <p className="mt-1 text-lg font-semibold">Total Potential Savings Available: ₹{recommendations.reduce((sum, rec) => sum + rec.potentialSavings, 0).toLocaleString()}</p>
           </div>
           <div className="flex gap-2">
             <Button onClick={() => setRefreshCount((prev) => prev + 1)}>
@@ -163,7 +163,7 @@ export default function Recommendations() {
           </Card>
           <Card className="shadow-md p-4 bg-white dark:bg-gray-800">
             <CardHeader><CardTitle>Balance</CardTitle></CardHeader>
-            <CardContent className={insights.balance < 0 ? "text-red-500" : "text-green-500"}>${insights.balance.toLocaleString()}</CardContent>
+            <CardContent className={insights.balance < 0 ? "text-red-500" : "text-green-500"}>₹{insights.balance.toLocaleString()}</CardContent>
           </Card>
           <Card className="shadow-md p-4 bg-white dark:bg-gray-800">
             <CardHeader><CardTitle>Top Expense</CardTitle></CardHeader>
@@ -218,7 +218,7 @@ export default function Recommendations() {
                     {rec.hint && <p className="text-xs text-gray-500 dark:text-gray-400">{rec.hint}</p>}
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className={`px-2 py-1 text-white rounded ${impactColors[rec.impact]}`}>${rec.potentialSavings.toLocaleString()}</span>
+                    <span className={`px-2 py-1 text-white rounded ${impactColors[rec.impact]}`}>₹{rec.potentialSavings.toLocaleString()}</span>
                     <Button size="sm" variant="outline" onClick={() => handleDeleteSelected(rec)}>Delete</Button>
                   </div>
                 </div>
