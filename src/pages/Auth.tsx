@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
 
 export default function Auth() {
@@ -152,9 +153,10 @@ export default function Auth() {
             />
           </div>
 
-          {/* PASSWORD WITH SHOW / HIDE OPTION */}
+          {/* PASSWORD WITH NORMAL VIEW / HIDE OPTION */}
           <div className="relative">
             <Label className="font-semibold">Password</Label>
+
             <Input
               type={showPassword ? "text" : "password"}
               value={isLogin ? loginData.password : signupData.password}
@@ -167,15 +169,21 @@ export default function Auth() {
               className="mt-1 pr-10"
             />
 
-            <span
-              className="absolute right-3 top-[38px] text-gray-600 cursor-pointer hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+            {/* Eye Toggle Button */}
+            <button
+              type="button"
               onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-[38px] text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
             >
-              {showPassword ? "👁️" : "🙈"}
-            </span>
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
           </div>
 
-          <Button type="submit" className="w-full py-3 text-lg" disabled={isLoading}>
+          <Button
+            type="submit"
+            className="w-full py-3 text-lg"
+            disabled={isLoading}
+          >
             {isLoading
               ? isLogin
                 ? "Logging in..."
