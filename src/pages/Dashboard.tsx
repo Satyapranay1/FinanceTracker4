@@ -115,9 +115,6 @@ export default function Dashboard() {
               title="Total Balance"
               value={`₹${summary.totalBalance.toFixed(2)}`}
               icon={Wallet}
-              trend={
-                summary.totalBalance >= 0 ? "+ from last month" : "- from last month"
-              }
               trendUp={summary.totalBalance >= 0}
               variant="default"
             />
@@ -125,7 +122,6 @@ export default function Dashboard() {
               title="Total Income"
               value={`₹${summary.totalIncome.toFixed(2)}`}
               icon={TrendingUp}
-              trend="+ from last month"
               trendUp={true}
               variant="success"
             />
@@ -133,7 +129,6 @@ export default function Dashboard() {
               title="Total Expenses"
               value={`₹${summary.totalExpenses.toFixed(2)}`}
               icon={TrendingDown}
-              trend="- from last month"
               trendUp={false}
               variant="destructive"
             />
@@ -141,7 +136,6 @@ export default function Dashboard() {
               title="Monthly Savings"
               value={parseFloat(summary.monthlySavings.toFixed(2)) >= 0 ? `₹${summary.monthlySavings.toFixed(2)}` : '₹0'}
               icon={PiggyBank}
-              trend="+ from last month"
               trendUp={true}
               variant="success"
             />
