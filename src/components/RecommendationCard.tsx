@@ -6,7 +6,7 @@ import { Badge } from "./ui/badge";
 interface RecommendationCardProps {
   category: string;
   suggestion: string;
-  hint?: string; 
+  hint?: string; // Added hint
   impact: 'Low' | 'Medium' | 'High';
   potentialSavings: number;
   percentOfIncome?: number;
@@ -55,7 +55,7 @@ export const RecommendationCard = ({
             <div className="flex items-center justify-between pt-2">
               <div className="flex items-center gap-2 text-success">
                 <TrendingDown className="h-4 w-4" />
-                <span className="text-sm font-medium">Save ${potentialSavings.toLocaleString()}</span>
+                <span className="text-sm font-medium">Save ₹{potentialSavings.toLocaleString()}</span>
               </div>
               {!applied && (
                 <div className="flex gap-2">
