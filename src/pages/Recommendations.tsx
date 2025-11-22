@@ -128,7 +128,8 @@ export default function Recommendations() {
     setRecommendations((prev) => [...prev, { ...rec, applied: false }]);
   };
 
-  if (!insights) return <div className="flex items-center justify-center h-screen">Loading AI insights...</div>;
+  if (!insights)
+    return <div className="flex items-center justify-center h-screen">Loading AI insights...</div>;
 
   return (
     <div className="flex flex-col min-h-screen bg-background dark:bg-gray-900 text-gray-900 dark:text-gray-100">
@@ -141,8 +142,12 @@ export default function Recommendations() {
             <h1 className="text-3xl font-bold mb-2">AI Recommendations</h1>
             <p className="text-gray-500 dark:text-gray-400">Personalized insights to optimize your spending</p>
             <p className="mt-1 text-lg font-semibold">Estimated Savings Applied: ₹{estimatedSavings.toLocaleString()}</p>
-            <p className="mt-1 text-lg font-semibold">Total Potential Savings Available: ₹{recommendations.reduce((sum, rec) => sum + rec.potentialSavings, 0).toLocaleString()}</p>
+            <p className="mt-1 text-lg font-semibold">
+              Total Potential Savings Available: ₹
+              {recommendations.reduce((sum, rec) => sum + rec.potentialSavings, 0).toLocaleString()}
+            </p>
           </div>
+
           <div className="flex gap-2">
             <Button onClick={() => setRefreshCount((prev) => prev + 1)}>
               <RefreshCw className="h-4 w-4 mr-2" /> Refresh Insights
@@ -155,20 +160,26 @@ export default function Recommendations() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <Card className="shadow-md p-4 bg-white dark:bg-gray-800">
             <CardHeader><CardTitle>Total Income</CardTitle></CardHeader>
-            <CardContent>${insights.totalIncome.toLocaleString()}</CardContent>
+            <CardContent>₹{insights.totalIncome.toLocaleString()}</CardContent>
           </Card>
+
           <Card className="shadow-md p-4 bg-white dark:bg-gray-800">
             <CardHeader><CardTitle>Total Expense</CardTitle></CardHeader>
-            <CardContent>${insights.totalExpense.toLocaleString()}</CardContent>
+            <CardContent>₹{insights.totalExpense.toLocaleString()}</CardContent>
           </Card>
+
           <Card className="shadow-md p-4 bg-white dark:bg-gray-800">
             <CardHeader><CardTitle>Balance</CardTitle></CardHeader>
-            <CardContent className={insights.balance < 0 ? "text-red-500" : "text-green-500"}>₹{insights.balance.toLocaleString()}</CardContent>
+            <CardContent className={insights.balance < 0 ? "text-red-500" : "text-green-500"}>
+              ₹{insights.balance.toLocaleString()}
+            </CardContent>
           </Card>
+
           <Card className="shadow-md p-4 bg-white dark:bg-gray-800">
             <CardHeader><CardTitle>Top Expense</CardTitle></CardHeader>
             <CardContent>{insights.topExpense}</CardContent>
           </Card>
+
           <Card className="shadow-md p-4 bg-white dark:bg-gray-800">
             <CardHeader><CardTitle>Top Income</CardTitle></CardHeader>
             <CardContent>{insights.topIncome}</CardContent>
@@ -194,7 +205,7 @@ export default function Recommendations() {
               key={rec.category}
               category={rec.category}
               suggestion={rec.suggestion}
-              hint={rec.hint} // Pass hint to card
+              hint={rec.hint}
               impact={rec.impact}
               potentialSavings={rec.potentialSavings}
               percentOfIncome={rec.percentOfIncome}
@@ -211,15 +222,23 @@ export default function Recommendations() {
             <CardHeader><CardTitle>Selected Recommendations</CardTitle></CardHeader>
             <CardContent className="space-y-2">
               {selectedRecs.map((rec) => (
-                <div key={rec.category} className="flex justify-between items-center p-2 border-b last:border-b-0 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700">
+                <div
+                  key={rec.category}
+                  className="flex justify-between items-center p-2 border-b last:border-b-0 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700"
+                >
                   <div>
                     <span className="font-semibold">{rec.category}</span>
                     <p className="text-sm text-gray-600 dark:text-gray-300">{rec.suggestion}</p>
                     {rec.hint && <p className="text-xs text-gray-500 dark:text-gray-400">{rec.hint}</p>}
                   </div>
+
                   <div className="flex items-center gap-2">
-                    <span className={`px-2 py-1 text-white rounded ${impactColors[rec.impact]}`}>₹{rec.potentialSavings.toLocaleString()}</span>
-                    <Button size="sm" variant="outline" onClick={() => handleDeleteSelected(rec)}>Delete</Button>
+                    <span className={`px-2 py-1 text-white rounded ${impactColors[rec.impact]}`}>
+                      ₹{rec.potentialSavings.toLocaleString()}
+                    </span>
+                    <Button size="sm" variant="outline" onClick={() => handleDeleteSelected(rec)}>
+                      Delete
+                    </Button>
                   </div>
                 </div>
               ))}
