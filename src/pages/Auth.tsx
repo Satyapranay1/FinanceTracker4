@@ -10,18 +10,28 @@ export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [loginData, setLoginData] = useState({ email: "", password: "" });
-  const [signupData, setSignupData] = useState({ name: "", email: "", password: "" });
+  const [showPassword, setShowPassword] = useState(false);
 
-  const backendURL = "https://backend2-6dmv.onrender.com/api/auth"; // Direct link
+  const [loginData, setLoginData] = useState({ email: "", password: "" });
+  const [signupData, setSignupData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const backendURL = "https://backend2-6dmv.onrender.com/api/auth";
 
   // ---------------- VALIDATION ----------------
-  const isValidGmail = (email: string) => /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email);
-  const isValidPassword = (password: string) =>
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/.test(password);
+  const isValidGmail = (email) =>
+    /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email);
+
+  const isValidPassword = (password) =>
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/.test(
+      password
+    );
 
   // ---------------- GENERIC FETCH ----------------
-  const makeRequest = async (endpoint: string, body: any) => {
+  const makeRequest = async (endpoint, body) => {
     try {
       const res = await fetch(`${backendURL}${endpoint}`, {
         method: "POST",
@@ -41,10 +51,8 @@ export default function Auth() {
   };
 
   // ---------------- LOGIN ----------------
-  const handleLogin = async (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
-
-    console.log("Logging in with:", loginData);
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
     if (!isValidGmail(loginData.email)) {
       toast.error("Please enter a valid Gmail address");
@@ -58,7 +66,6 @@ export default function Auth() {
     setIsLoading(true);
     try {
       const { res, data } = await makeRequest("/login", loginData);
-      console.log("Login response:", data, "status:", res?.status);
 
       if (res && res.ok) {
         if (data.token) localStorage.setItem("token", data.token);
@@ -67,19 +74,14 @@ export default function Auth() {
       } else {
         toast.error(data.message || "Invalid credentials");
       }
-    } catch (err) {
-      console.error("Login error:", err);
-      toast.error("Unable to connect to server");
     } finally {
       setIsLoading(false);
     }
   };
 
   // ---------------- SIGNUP ----------------
-  const handleSignup = async (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
-
-    console.log("Signing up with:", signupData);
+  const handleSignup = async (e) => {
+    e.preventDefault();
 
     if (!signupData.name) {
       toast.error("Please enter your name");
@@ -97,17 +99,13 @@ export default function Auth() {
     setIsLoading(true);
     try {
       const { res, data } = await makeRequest("/register", signupData);
-      console.log("Signup response:", data, "status:", res?.status);
 
       if (res && res.ok) {
         toast.success(data.message || "Account created successfully!");
-        setIsLogin(true); // Switch to login after signup
+        setIsLogin(true);
       } else {
         toast.error(data.message || "Signup failed");
       }
-    } catch (err) {
-      console.error("Signup error:", err);
-      toast.error("Unable to connect to server");
     } finally {
       setIsLoading(false);
     }
@@ -120,14 +118,19 @@ export default function Auth() {
           Finance Tracker
         </h1>
 
-        <form onSubmit={isLogin ? handleLogin : handleSignup} className="space-y-5">
+        <form
+          onSubmit={isLogin ? handleLogin : handleSignup}
+          className="space-y-5"
+        >
           {!isLogin && (
             <div>
               <Label className="font-semibold">Full Name</Label>
               <Input
                 type="text"
                 value={signupData.name}
-                onChange={(e) => setSignupData({ ...signupData, name: e.target.value })}
+                onChange={(e) =>
+                  setSignupData({ ...signupData, name: e.target.value })
+                }
                 placeholder="John Doe"
                 className="mt-1"
               />
@@ -149,10 +152,11 @@ export default function Auth() {
             />
           </div>
 
-          <div>
+          {/* PASSWORD WITH SHOW / HIDE OPTION */}
+          <div className="relative">
             <Label className="font-semibold">Password</Label>
             <Input
-              type="password"
+              type={showPassword ? "text" : "password"}
               value={isLogin ? loginData.password : signupData.password}
               onChange={(e) =>
                 isLogin
@@ -160,8 +164,15 @@ export default function Auth() {
                   : setSignupData({ ...signupData, password: e.target.value })
               }
               placeholder="••••••••"
-              className="mt-1"
+              className="mt-1 pr-10"
             />
+
+            <span
+              className="absolute right-3 top-[38px] text-gray-600 cursor-pointer hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? "👁️" : "🙈"}
+            </span>
           </div>
 
           <Button type="submit" className="w-full py-3 text-lg" disabled={isLoading}>
